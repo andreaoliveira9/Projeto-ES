@@ -1,0 +1,15 @@
+[submodule "web_ui"]
+	path = web_ui
+	url = git@github.com:Sports-Club-Management-Platform/web_ui.git
+[submodule "user_microservice"]
+	path = user_microservice
+	url = git@github.com:Sports-Club-Management-Platform/user_microservice.git
+[submodule "ticket_microservice"]
+	path = ticket_microservice
+	url = git@github.com:Sports-Club-Management-Platform/ticket_microservice.git
+[submodule "game_microservice"]
+	path = game_microservice
+	url = git@github.com:Sports-Club-Management-Platform/game_microservice.git
+[submodule "payments_microservice"]
+	path = payments_microservice
+	url = git@github.com:Sports-Club-Management-Platform/payments_microservice.git
