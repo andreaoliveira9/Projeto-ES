@@ -1,11 +1,3 @@
-variable "aws_access_key_id" {
-  type        = string
-}
-
-variable "aws_access_key_secret" {
-  type        = string
-}
-
 variable "aws_region" {
   description = "AWS Region"
   default     = "us-east-1"
