@@ -1,10 +1,3 @@
-variable "aws_access_key_id" {}
-# export TF_VAR_aws_access_key_id=""
-variable "aws_access_key_secret" {}
-# export TF_VAR_aws_access_key_secret=""
-variable "aws_session_token" {}
-# export TF_VAR_aws_session_token=""
-
 variable "aws_region" {
   description = "AWS Region"
   default     = "us-east-1"
