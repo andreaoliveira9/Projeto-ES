@@ -19,12 +19,8 @@ terraform {
 
 provider "aws" {
   region = var.aws_region
-}
-
-module "iam" {
-  source = "./terraform_modules/iam"
-
-  public_key = var.public_key
+  access_key = var.aws_access_key_id
+  secret_key = var.aws_access_key_secret
 }
 
 locals {

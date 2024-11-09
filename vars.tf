@@ -1,6 +1,9 @@
-variable "public_key" {
+variable "aws_access_key_id" {
   type        = string
-  description = "The value of the public key"
+}
+
+variable "aws_access_key_secret" {
+  type        = string
 }
 
 variable "aws_region" {
