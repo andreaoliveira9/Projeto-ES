@@ -20,4 +20,4 @@ jobs:
         run: terraform init -input=false
 
       - name: Terraform Destroy
-        run: terraform destroy -auto-approve -input=false -target=module.Networking
+        run: terraform destroy -auto-approve -input=false -target=module.networking
