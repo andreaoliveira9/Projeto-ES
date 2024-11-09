@@ -1,3 +1,26 @@
+terraform {
+  cloud {
+    organization = "uachadomartelo"
+
+    workspaces {
+      name = "main"
+    }
+  }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.16"
+    }
+  }
+
+  required_version = ">= 1.2.0"
+}
+
+provider "aws" {
+  region = var.aws_region
+}
+
 locals {
   testing_availability_zones = ["${var.aws_region}a", "${var.aws_region}b"]
 }
