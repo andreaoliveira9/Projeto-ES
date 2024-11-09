@@ -25,7 +25,7 @@ locals {
   testing_availability_zones = ["${var.aws_region}a", "${var.aws_region}b"]
 }
 
-module "Networking" {
+module "networking" {
   source               = "./terraform_modules/networking"
   aws_region           = var.aws_region
   environment          = var.environment
