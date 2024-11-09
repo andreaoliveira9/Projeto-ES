@@ -21,6 +21,12 @@ provider "aws" {
   region = var.aws_region
 }
 
+module "iam" {
+  source = "./terraform_modules/iam"
+
+  public_key = var.public_key
+}
+
 locals {
   testing_availability_zones = ["${var.aws_region}a", "${var.aws_region}b"]
 }

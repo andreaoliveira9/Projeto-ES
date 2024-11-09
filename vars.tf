@@ -1,3 +1,8 @@
+variable "public_key" {
+  type        = string
+  description = "The value of the public key"
+}
+
 variable "aws_region" {
   description = "AWS Region"
   default     = "us-east-1"
