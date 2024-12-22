@@ -13,3 +13,6 @@
 [submodule "payments_microservice"]
 	path = payments_microservice
 	url = git@github.com:Sports-Club-Management-Platform/payments_microservice.git
+[submodule "email_microservive"]
+	path = email_microservive
+	url = git@github.com:Sports-Club-Management-Platform/email_microservive.git
