@@ -51,7 +51,7 @@ resource "aws_db_instance" "games_db" {
 
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
-  monitoring_interval = 60
+  monitoring_interval = 0
 
   tags = {
     Name = "Games MYSQL Database"
@@ -75,7 +75,7 @@ resource "aws_db_instance" "payments_db" {
 
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
-  monitoring_interval = 60
+  monitoring_interval = 0
 
   tags = {
     Name = "Payments MYSQL Database"
@@ -99,7 +99,7 @@ resource "aws_db_instance" "tickets_db" {
 
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
-  monitoring_interval = 60
+  monitoring_interval = 0
 
   tags = {
     Name = "Tickets MYSQL Database"
@@ -123,7 +123,7 @@ resource "aws_db_instance" "users_db" {
 
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
-  monitoring_interval = 60
+  monitoring_interval = 0
 
   tags = {
     Name = "Users MYSQL Database"
