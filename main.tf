@@ -64,3 +64,13 @@ module "database" {
   users_db_password = var.users_db_password
   users_db_name     = var.users_db_name
 }
+
+module "message_queue" {
+  source = "./terraform_modules/message_queue"
+
+  vpc_id             = module.networking.vpc_info.vpc_id
+  private_subnet_ids = module.networking.vpc_info.private_subnets[*].id
+
+  mq_user     = var.mq_user
+  mq_password = var.mq_password
+}

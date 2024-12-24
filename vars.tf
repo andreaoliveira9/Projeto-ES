@@ -103,3 +103,15 @@ variable "users_db_name" {
   description = "The name for the users database"
   default     = "users_db"
 }
+
+variable "mq_user" {
+  type        = string
+  description = "The username for the message queue"
+  default = "mq_user"
+}
+
+variable "mq_password" {
+  type        = string
+  description = "The password for the message queue"
+  default = "mq_password"
+}
