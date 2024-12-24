@@ -1,12 +1,3 @@
-resource "aws_mq_subnet_group" "mq_subnet_group" {
-  name       = "mq_subnet_group"
-  subnet_ids = [var.private_subnet_ids[0], var.private_subnet_ids[1]]
-
-  tags = {
-    Name = "MQ Subnet Group"
-  }
-}
-
 resource "aws_mq_broker" "mq" {
   broker_name               = "mq-primary"
   engine_type               = "RabbitMQ"
@@ -14,7 +5,8 @@ resource "aws_mq_broker" "mq" {
   host_instance_type        = "mq.m5.large"
   security_groups           = [aws_security_group.mq_sg.id]
   deployment_mode           = "ACTIVE_STANDBY_MULTI_AZ"
-  subnet_ids                = aws_mq_subnet_group.mq_subnet_group.subnet_ids
+  subnet_ids                = var.private_subnet_ids
+  publicly_accessible       = false
 
   user {
     username = vsr.mq_user
