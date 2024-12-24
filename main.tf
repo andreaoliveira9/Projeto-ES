@@ -46,7 +46,7 @@ module "database" {
   source = "./terraform_modules/database"
 
   vpc_id             = module.networking.vpc_info.vpc_id
-  private_subnet_ids = module.networking.vpc_info.private_subnets.id
+  private_subnet_ids = module.networking.vpc_info.private_subnets[*].id
 
   games_db_user     = var.games_db_user
   games_db_password = var.games_db_password
