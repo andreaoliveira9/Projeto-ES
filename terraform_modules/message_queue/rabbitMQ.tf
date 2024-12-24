@@ -7,6 +7,7 @@ resource "aws_mq_broker" "mq" {
   deployment_mode           = "ACTIVE_STANDBY_MULTI_AZ"
   subnet_ids                = var.private_subnet_ids
   publicly_accessible       = false
+  auto_minor_version_upgrade = true
 
   user {
     username = var.mq_user
