@@ -8,8 +8,6 @@ resource "aws_mq_subnet_group" "mq_subnet_group" {
 }
 
 resource "aws_mq_broker" "mq" {
-  provider                  = awsalternate
-  apply_immediately         = true
   broker_name               = "mq-primary"
   engine_type               = "RabbitMQ"
   engine_version            = "3.13"
