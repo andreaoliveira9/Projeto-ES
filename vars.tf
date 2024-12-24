@@ -113,5 +113,5 @@ variable "mq_user" {
 variable "mq_password" {
   type        = string
   description = "The password for the message queue"
-  default = "mq_password"
+  default = "mq_password12"
 }
