@@ -9,8 +9,8 @@ resource "aws_mq_broker" "mq" {
   publicly_accessible       = false
 
   user {
-    username = vsr.mq_user
-    password = vsr.mq_password
+    username = var.mq_user
+    password = var.mq_password
   }
 }
 
