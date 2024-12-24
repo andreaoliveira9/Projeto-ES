@@ -7,6 +7,18 @@ resource "aws_s3_bucket" "image_bucket" {
   }
 }
 
+resource "aws_s3_object" "pavilions_folder" {
+  bucket = aws_s3_bucket.image_bucket.bucket
+  key    = "pavilions/"
+  content = ""        
+}
+
+resource "aws_s3_object" "clubs_folder" {
+  bucket = aws_s3_bucket.image_bucket.bucket
+  key    = "clubs/"   
+  content = ""       
+}
+
 resource "aws_iam_user" "boto3_user" {
   name = "boto3_user"
 }
