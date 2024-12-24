@@ -115,3 +115,15 @@ variable "mq_password" {
   description = "The password for the message queue"
   default = "mq_password12"
 }
+
+variable "cert_body" {
+  description = "The body of the SSL certificate in PEM format"
+  type        = string
+  sensitive   = true
+}
+
+variable "cert_private_key" {
+  description = "The private key of the SSL certificate in PEM format"
+  type        = string
+  sensitive   = true
+}

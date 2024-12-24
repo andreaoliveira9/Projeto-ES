@@ -76,3 +76,14 @@ module "message_queue" {
   mq_user     = var.mq_user
   mq_password = var.mq_password
 }
+
+module "ec2" {
+  source = "./terraform_modules/ec2"
+
+  vpc_id             = module.networking.vpc_info.vpc_id
+  public_subnet_ids  = module.networking.vpc_info.public_subnets[*].id
+  private_subnet_ids = module.networking.vpc_info.private_subnets[*].id
+
+  cert_private_key = var.cert_private_key
+  cert_body        = var.cert_body
+}
