@@ -4,7 +4,7 @@ resource "aws_mq_broker" "mq" {
   engine_version            = "3.13"
   host_instance_type        = "mq.m5.large"
   security_groups           = [aws_security_group.mq_sg.id]
-  deployment_mode           = "ACTIVE_STANDBY_MULTI_AZ"
+  deployment_mode           = "CLUSTER_MULTI_AZ"
   subnet_ids                = var.private_subnet_ids
   publicly_accessible       = false
   auto_minor_version_upgrade = true
