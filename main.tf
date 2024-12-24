@@ -68,6 +68,8 @@ module "database" {
 module "message_queue" {
   source = "./terraform_modules/message_queue"
 
+  aws_region = var.aws_region
+
   vpc_id             = module.networking.vpc_info.vpc_id
   private_subnet_ids = module.networking.vpc_info.private_subnets[*].id
 
