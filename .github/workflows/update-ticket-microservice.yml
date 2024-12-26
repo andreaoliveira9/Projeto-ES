@@ -1,0 +1,25 @@
+name: Inventory CD Pipeline
+
+on:
+  repository_dispatch:
+    types: [update-ticket-microservice]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
+
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Terraform Apply
+        env:
+          IMAGE_TAG: ${{ github.event.client_payload.image_tag }}
+        run: terraform apply -auto-approve -input=false -var="inventory_image_tag=${IMAGE_TAG}"
