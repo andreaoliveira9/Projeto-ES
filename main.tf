@@ -84,6 +84,53 @@ module "ec2" {
   public_subnet_ids  = module.networking.vpc_info.public_subnets[*].id
   private_subnet_ids = module.networking.vpc_info.private_subnets[*].id
 
+  key_name         = module.iam.key_name
   cert_private_key = var.cert_private_key
   cert_body        = var.cert_body
+}
+
+module "ecs" {
+  source = "./terraform_modules/ecs"
+
+  # infrastructure & security
+  aws_region         = var.aws_region
+  vpc_id             = module.networking.vpc_info.vpc_id
+  public_subnet_ids  = module.networking.vpc_info.public_subnets[*].id
+  private_subnet_ids = module.networking.vpc_info.private_subnets[*].id
+
+
+  ecs_asg_arn                = module.ec2.ecs_asg_arn
+  user_ui_tg_arn             = module.ec2.user_ui_tg_arn
+  games_api_tg_arn           = module.ec2.games_api_tg_arn
+  tickets_api_tg_arn         = module.ec2.tickets_api_tg_arn
+  payments_api_tg_arn        = module.ec2.payments_api_tg_arn
+  users_api_tg_arn           = module.ec2.users_api_tg_arn
+  instances_sg_id            = module.ec2.instances_sg_id
+
+  # docker images
+  user_ui_image_repo       = var.user_ui_image_repo
+  user_ui_image_tag        = var.user_ui_image_tag
+  games_api_image_repo     = var.games_api_image_repo
+  games_api_image_tag      = var.games_api_image_tag
+  tickets_api_image_repo   = var.tickets_api_image_repo
+  tickets_api_image_tag    = var.tickets_api_image_tag
+  users_api_image_repo     = var.users_api_image_repo
+  users_api_image_tag      = var.users_api_image_tag
+  payments_api_image_repo  = var.payments_api_image_repo
+  payments_api_image_tag   = var.payments_api_image_tag
+  emails_image_repo        = var.emails_image_repo
+  emails_image_tag         = var.emails_image_tag
+
+  # ui env vars
+  lb_dns_name                 = module.ec2.lb_dns_name
+
+  # api env vars
+  users_db_connection_string           = module.database.users_db_connection_string
+  games_db_connection_string           = module.database.games_db_connection_string
+  tickets_db_connection_string         = module.database.tickets_db_connection_string
+  payments_db_connection_string        = module.database.payments_db_connection_string
+  s3_bucket_name                       = module.database.s3_bucket_name
+  boto3_access_key                     = module.database.access_key
+  boto3_secret_key                     = module.database.secret_key
+
 }

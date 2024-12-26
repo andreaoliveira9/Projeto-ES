@@ -17,3 +17,7 @@ variable "cert_private_key" {
 variable "cert_body" {
   type = string
 }
+
+variable "key_name" {
+  type = string
+}

@@ -127,3 +127,69 @@ variable "cert_private_key" {
   type        = string
   sensitive   = true
 }
+
+variable "user_ui_image_repo" {
+  type        = string
+  description = "The image for the user-ui container"
+  default     = ""
+}
+
+variable "user_ui_image_tag" {
+  type = string
+  default = "latest"
+}
+
+variable "games_api_image_repo" {
+  type        = string
+  description = "The image for the games-api container"
+  default     = ""
+}
+
+variable "games_api_image_tag" {
+  type = string
+  default = "latest"
+}
+
+variable "tickets_api_image_repo" {
+  type        = string
+  description = "The image for the tickets-api container"
+  default     = ""
+}
+
+variable "tickets_api_image_tag" {
+  type = string
+  default = "latest"
+}
+
+variable "users_api_image_repo" {
+  type        = string
+  description = "The image for the users-api container"
+  default     = ""
+}
+
+variable "users_api_image_tag" {
+  type = string
+  default = "latest"
+}
+
+variable "payments_api_image_repo" {
+  type        = string
+  description = "The image for the payments-api container"
+  default     = ""
+}
+
+variable "payments_api_image_tag" {
+  type = string
+  default = "latest"
+}
+
+variable "emails_image_repo" {
+  type        = string
+  description = "The image for the user-ui container"
+  default     = ""
+}
+
+variable "emails_image_tag" {
+  type = string
+  default = "latest"
+}
