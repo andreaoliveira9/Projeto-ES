@@ -8,8 +8,9 @@ resource "aws_launch_template" "ecs_lt" {
   instance_type = "t2.micro"
 
   key_name               = var.key_name
+
   iam_instance_profile {
-    name = "ecsInstanceRole"
+    name = var.ecs_instance_profile_name
   }
 
   block_device_mappings {
@@ -44,7 +45,7 @@ resource "aws_security_group" "instances" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.lb.id]
+    security_groups = [aws_security_group.ui_lb.id]
   }
 
   # allow inbound traffic from the public subnet on port 8000 (api)
@@ -52,7 +53,7 @@ resource "aws_security_group" "instances" {
     from_port       = 8000
     to_port         = 8000
     protocol        = "tcp"
-    security_groups = [aws_security_group.lb.id]
+    security_groups = [aws_security_group.apis_lb.id]
   }
 
   # allow all outbound traffic

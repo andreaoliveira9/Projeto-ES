@@ -87,6 +87,8 @@ module "ec2" {
   key_name         = module.iam.key_name
   cert_private_key = var.cert_private_key
   cert_body        = var.cert_body
+
+  ecs_instance_profile_name = module.iam.ecs_instance_profile_name
 }
 
 module "ecs" {
@@ -98,14 +100,14 @@ module "ecs" {
   public_subnet_ids  = module.networking.vpc_info.public_subnets[*].id
   private_subnet_ids = module.networking.vpc_info.private_subnets[*].id
 
-
-  ecs_asg_arn                = module.ec2.ecs_asg_arn
-  user_ui_tg_arn             = module.ec2.user_ui_tg_arn
-  games_api_tg_arn           = module.ec2.games_api_tg_arn
-  tickets_api_tg_arn         = module.ec2.tickets_api_tg_arn
-  payments_api_tg_arn        = module.ec2.payments_api_tg_arn
-  users_api_tg_arn           = module.ec2.users_api_tg_arn
-  instances_sg_id            = module.ec2.instances_sg_id
+  ecs_task_execution_role_arn  = module.iam.ecs_task_execution_role_arn
+  ecs_asg_arn                  = module.ec2.ecs_asg_arn
+  user_ui_tg_arn               = module.ec2.user_ui_tg_arn
+  games_api_tg_arn             = module.ec2.games_api_tg_arn
+  tickets_api_tg_arn           = module.ec2.tickets_api_tg_arn
+  payments_api_tg_arn          = module.ec2.payments_api_tg_arn
+  users_api_tg_arn             = module.ec2.users_api_tg_arn
+  instances_sg_id              = module.ec2.instances_sg_id
 
   # docker images
   user_ui_image_repo       = var.user_ui_image_repo
@@ -120,10 +122,7 @@ module "ecs" {
   payments_api_image_tag   = var.payments_api_image_tag
   emails_image_repo        = var.emails_image_repo
   emails_image_tag         = var.emails_image_tag
-
-  # ui env vars
-  lb_dns_name                 = module.ec2.lb_dns_name
-
+  
   # api env vars
   users_db_connection_string           = module.database.users_db_connection_string
   games_db_connection_string           = module.database.games_db_connection_string
@@ -132,5 +131,4 @@ module "ecs" {
   s3_bucket_name                       = module.database.s3_bucket_name
   boto3_access_key                     = module.database.access_key
   boto3_secret_key                     = module.database.secret_key
-
 }

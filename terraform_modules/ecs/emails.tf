@@ -18,7 +18,7 @@ resource "aws_ecs_service" "emails_service" {
 resource "aws_ecs_task_definition" "emails_task_definition" {
   family             = "emails-task"
   network_mode       = "awsvpc"
-  execution_role_arn = "arn:aws:iam::334642795591:role/ecsTaskExecutionRole"
+  execution_role_arn = var.ecs_task_execution_role_arn
   cpu                = 256
 
   runtime_platform {

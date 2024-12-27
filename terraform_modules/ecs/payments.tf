@@ -24,7 +24,7 @@ resource "aws_ecs_service" "payments_api_service" {
 resource "aws_ecs_task_definition" "payments_api_task_definition" {
   family             = "payments-api-task"
   network_mode       = "awsvpc"
-  execution_role_arn = "arn:aws:iam::334642795591:role/ecsTaskExecutionRole"
+  execution_role_arn = var.ecs_task_execution_role_arn
   cpu                = 256
 
   runtime_platform {
@@ -54,16 +54,11 @@ resource "aws_ecs_task_definition" "payments_api_task_definition" {
           awslogs-stream-prefix = "ecs"
         }
       }
-      /* environment = [
-        {
-          name  = "DATABASE_URL"
-          value = var.drop_off_points_db_connection_string
-        },
-      ] */
     }
   ])
 }
 
+# Log Group
 resource "aws_cloudwatch_log_group" "payments_log_group" {
   name              = "/ecs/clubsync-payments-api"
   retention_in_days = 7

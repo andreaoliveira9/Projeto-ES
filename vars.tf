@@ -142,7 +142,7 @@ variable "user_ui_image_tag" {
 variable "games_api_image_repo" {
   type        = string
   description = "The image for the games-api container"
-  default     = ""
+  default     = "296062566980.dkr.ecr.eu-west-3.amazonaws.com/clubsync/game-microservice"
 }
 
 variable "games_api_image_tag" {
@@ -153,7 +153,7 @@ variable "games_api_image_tag" {
 variable "tickets_api_image_repo" {
   type        = string
   description = "The image for the tickets-api container"
-  default     = ""
+  default     = "296062566980.dkr.ecr.eu-west-3.amazonaws.com/clubsync/ticket-microservice"
 }
 
 variable "tickets_api_image_tag" {
@@ -164,7 +164,7 @@ variable "tickets_api_image_tag" {
 variable "users_api_image_repo" {
   type        = string
   description = "The image for the users-api container"
-  default     = ""
+  default     = "296062566980.dkr.ecr.eu-west-3.amazonaws.com/clubsync/user-microservice"
 }
 
 variable "users_api_image_tag" {
@@ -175,7 +175,7 @@ variable "users_api_image_tag" {
 variable "payments_api_image_repo" {
   type        = string
   description = "The image for the payments-api container"
-  default     = ""
+  default     = "296062566980.dkr.ecr.eu-west-3.amazonaws.com/clubsync/payments-microservice"
 }
 
 variable "payments_api_image_tag" {
@@ -186,7 +186,7 @@ variable "payments_api_image_tag" {
 variable "emails_image_repo" {
   type        = string
   description = "The image for the user-ui container"
-  default     = ""
+  default     = "296062566980.dkr.ecr.eu-west-3.amazonaws.com/clubsync/email-microservice"
 }
 
 variable "emails_image_tag" {

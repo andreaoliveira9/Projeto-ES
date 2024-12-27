@@ -19,6 +19,9 @@ variable "instances_sg_id" {
   type = string
 }
 
+variable "ecs_task_execution_role_arn" {
+  type = string
+}
 # auto scaling group
 variable "ecs_asg_arn" {
   type = string
@@ -91,11 +94,6 @@ variable "emails_image_repo" {
 }
 
 variable "emails_image_tag" {
-  type = string
-}
-
-# urls
-variable "lb_dns_name" {
   type = string
 }
 

@@ -24,7 +24,7 @@ resource "aws_ecs_service" "user_ui_service" {
 resource "aws_ecs_task_definition" "user_ui_task_definition" {
   family             = "user-ui-task"
   network_mode       = "awsvpc"
-  execution_role_arn = "arn:aws:iam::334642795591:role/ecsTaskExecutionRole"
+  execution_role_arn = var.ecs_task_execution_role_arn
   cpu                = 512
 
   runtime_platform {

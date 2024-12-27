@@ -21,3 +21,7 @@ variable "cert_body" {
 variable "key_name" {
   type = string
 }
+
+variable "ecs_instance_profile_name" {
+  type = string
+}
