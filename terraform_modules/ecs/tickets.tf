@@ -54,12 +54,12 @@ resource "aws_ecs_task_definition" "tickets_api_task_definition" {
           awslogs-stream-prefix = "ecs"
         }
       }
-      /* environment = [
+      environment = [
         {
-          name  = "DATABASE_URL"
-          value = var.drop_off_points_db_connection_string
+          name  = "MYSQL_URL"
+          value = var.tickets_db_connection_string
         },
-      ] */
+      ]
     }
   ])
 }
