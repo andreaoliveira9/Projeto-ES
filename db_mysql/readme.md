@@ -1,0 +1,1 @@
+Everything you want to be executed in the database initialization should be placed inside this folder. Only .sql files are executed.
