@@ -63,6 +63,8 @@ module "database" {
   users_db_user     = var.users_db_user
   users_db_password = var.users_db_password
   users_db_name     = var.users_db_name
+
+  instances_sg_id   = module.ec2.instances_sg_id
 }
 
 module "message_queue" {

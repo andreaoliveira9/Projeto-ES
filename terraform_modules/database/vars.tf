@@ -9,6 +9,10 @@ variable "private_subnet_ids" {
   description = "The IDs of the private subnets"
 }
 
+variable "instances_sg_id" {
+  type = string
+}
+
 variable "games_db_password" {
   type        = string
   description = "Password for the Games Database"

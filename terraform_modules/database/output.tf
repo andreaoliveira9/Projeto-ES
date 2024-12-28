@@ -1,20 +1,20 @@
 output "games_db_connection_string" {
-  value = "mysql+pymysql://${var.games_db_user}:${var.games_db_password}@${aws_db_instance.games_db.address}/${var.games_db_name}"
+  value = "mysql+pymysql://${var.games_db_user}:${var.games_db_password}@${aws_db_instance.games_db.address}:3306/${var.games_db_name}"
   description = "Connection string for Games DB"
 }
 
 output "payments_db_connection_string" {
-  value = "mysql+pymysql://${var.payments_db_user}:${var.payments_db_password}@${aws_db_instance.payments_db.address}/${var.payments_db_name}"
+  value = "mysql+pymysql://${var.payments_db_user}:${var.payments_db_password}@${aws_db_instance.payments_db.address}:3306/${var.payments_db_name}"
   description = "Connection string for Payments DB"
 }
 
 output "tickets_db_connection_string" {
-  value = "mysql+pymysql://${var.tickets_db_user}:${var.tickets_db_password}@${aws_db_instance.tickets_db.address}/${var.tickets_db_name}"
+  value = "mysql+pymysql://${var.tickets_db_user}:${var.tickets_db_password}@${aws_db_instance.tickets_db.address}:3306/${var.tickets_db_name}"
   description = "Connection string for Tickets DB"
 }
 
 output "users_db_connection_string" {
-  value = "mysql+pymysql://${var.users_db_user}:${var.users_db_password}@${aws_db_instance.users_db.address}/${var.users_db_name}"
+  value = "mysql+pymysql://${var.users_db_user}:${var.users_db_password}@${aws_db_instance.users_db.address}:3306/${var.users_db_name}"
   description = "Connection string for Users DB"
 }
 
