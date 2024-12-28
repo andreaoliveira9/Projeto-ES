@@ -40,7 +40,6 @@ variable "games_db_user" {
 variable "games_db_password" {
   type        = string
   description = "The password for the games database"
-  sensitive   = true
   default = "games_db_password"
 }
 
