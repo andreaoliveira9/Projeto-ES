@@ -130,7 +130,7 @@ variable "cert_private_key" {
 variable "user_ui_image_repo" {
   type        = string
   description = "The image for the user-ui container"
-  default     = ""
+  default     = "296062566980.dkr.ecr.eu-west-3.amazonaws.com/clubsync/web-ui"
 }
 
 variable "user_ui_image_tag" {
