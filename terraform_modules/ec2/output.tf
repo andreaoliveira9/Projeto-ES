@@ -6,6 +6,10 @@ output "user_ui_tg_arn" {
   value = aws_lb_target_group.ui_tg.arn
 }
 
+output "user_ui_url" {
+  value = aws_lb.ui_lb.dns_name
+}
+
 output "games_api_tg_arn" {
   value = aws_lb_target_group.games_tg.arn
 }

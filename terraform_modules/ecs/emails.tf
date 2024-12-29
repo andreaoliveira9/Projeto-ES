@@ -41,12 +41,28 @@ resource "aws_ecs_task_definition" "emails_task_definition" {
           awslogs-stream-prefix = "ecs"
         }
       }
-      /* environment = [
+      environment = [
         {
-          name  = "DATABASE_URL"
-          value = var.drop_off_points_db_connection_string
+          name  = "SERVICE_ID"
+          value = var.service_id
         },
-      ] */
+        {
+          name  = "TEMPLATE_ID"
+          value = var.template_id
+        },
+        {
+          name  = "PUBLIC_KEY"
+          value = var.public_key_email
+        },
+        {
+          name  = "PRIVATE_KEY"
+          value = var.private_key_email
+        },
+        {
+          name  = "RABBITMQ_URL"
+          value = var.mq_connection_string
+        },
+      ]
     }
   ])
 }

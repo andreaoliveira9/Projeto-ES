@@ -56,14 +56,12 @@ resource "aws_ecs_task_definition" "user_ui_task_definition" {
         }
       }
 
-      /* environment = [
-
+      environment = [
         {
-          name  = "VITE_INVENTORY_URL"
-          value = "https://uachado.pt/inventory/v1/"
-
+          name  = "VITE_LOGIN_SIGN_UP"
+          value = var.login_sign_up
         },
-      ] */
+      ]
     }
   ])
 }

@@ -105,6 +105,7 @@ module "ecs" {
   ecs_task_execution_role_arn  = module.iam.ecs_task_execution_role_arn
   ecs_asg_arn                  = module.ec2.ecs_asg_arn
   user_ui_tg_arn               = module.ec2.user_ui_tg_arn
+  user_ui_url                  = module.ec2.user_ui_url
   games_api_tg_arn             = module.ec2.games_api_tg_arn
   tickets_api_tg_arn           = module.ec2.tickets_api_tg_arn
   payments_api_tg_arn          = module.ec2.payments_api_tg_arn
@@ -126,6 +127,7 @@ module "ecs" {
   emails_image_tag         = var.emails_image_tag
   
   # api env vars
+  domain = module.ec2.user_ui_url
   users_db_connection_string           = module.database.users_db_connection_string
   games_db_connection_string           = module.database.games_db_connection_string
   tickets_db_connection_string         = module.database.tickets_db_connection_string
@@ -133,4 +135,25 @@ module "ecs" {
   s3_bucket_name                       = module.database.s3_bucket_name
   boto3_access_key                     = module.database.access_key
   boto3_secret_key                     = module.database.secret_key
+  mq_connection_string                 = module.message_queue.mq_connection_string
+
+  # env var email
+  service_id                          = var.service_id
+  template_id                        = var.template_id
+  public_key_email                  = var.public_key_email
+  private_key_email                 = var.private_key_email
+
+  # env var ui
+  login_sign_up                 = var.login_sign_up
+
+  # env var users
+  cognito_user_pool_id              = var.cognito_user_pool_id
+  cognito_user_client_id            = var.cognito_user_client_id
+  cognito_user_client_secret       = var.cognito_user_client_secret
+  cognito_token_endpoint          = var.cognito_token_endpoint
+
+  # env var payments
+  stripe_api_key                 = var.stripe_api_key
+  stripe_webhook_secret = var.stripe_webhook_secret
+  expire_time = var.expire_time
 }

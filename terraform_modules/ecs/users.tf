@@ -54,12 +54,36 @@ resource "aws_ecs_task_definition" "users_api_task_definition" {
           awslogs-stream-prefix = "ecs"
         }
       }
-      /* environment = [
+      environment = [
         {
-          name  = "DATABASE_URL"
-          value = var.drop_off_points_db_connection_string
+          name  = "MYSQL_URL"
+          value = var.users_db_connection_string
         },
-      ] */
+        {
+          name  = "AWS_REGION"
+          value = var.aws_region
+        },
+        {
+          name  = "USER_POOL_ID"
+          value = var.cognito_user_pool_id
+        },
+        {
+          name  = "COGNITO_USER_CLIENT_ID"
+          value = var.cognito_user_client_id
+        },
+        {
+          name  = "COGNITO_USER_CLIENT_SECRET"
+          value = var.cognito_user_client_secret
+        },
+        {
+          name  = "COGNITO_TOKEN_ENDPOINT"
+          value = var.cognito_token_endpoint
+        },
+        {
+          name  = "REDIRECT_URI"
+          value = "${var.domain}/oauth2/idpresponse"
+        },
+      ]
     }
   ])
 }

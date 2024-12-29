@@ -54,12 +54,24 @@ resource "aws_ecs_task_definition" "games_api_task_definition" {
           awslogs-stream-prefix = "ecs"
         }
       }
-      /* environment = [
+      environment = [
         {
-          name  = "DATABASE_URL"
-          value = var.drop_off_points_db_connection_string
+          name  = "MYSQL_URL"
+          value = var.games_db_connection_string
         },
-      ] */
+        {
+          name  = "AWS_S3_BUCKET"
+          value = var.s3_bucket_name
+        },
+        {
+          name  = "AWS_ACCESS_KEY_ID"
+          value = var.boto3_access_key
+        },
+        {
+          name  = "AWS_SECRET_ACCESS_KEY"
+          value = var.boto3_secret_key
+        },
+      ]
     }
   ])
 }

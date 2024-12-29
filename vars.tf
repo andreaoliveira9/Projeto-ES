@@ -192,3 +192,69 @@ variable "emails_image_tag" {
   type = string
   default = "latest"
 }
+
+# Email service variables
+variable "service_id" {
+  type        = string
+  description = "The service id for the email service"
+  default     = "service_id"
+}
+
+variable "template_id" {
+  type        = string
+  description = "The template id for the email service"
+  default     = "template_id"
+}
+
+variable "public_key_email" {
+  type        = string
+  description = "The value of the public key"
+}
+
+variable "private_key_email" {
+  type        = string
+  description = "The value of the private key"
+}
+
+# UI service variables
+variable "login_sign_up" {
+  type        = string
+  description = "The value of the login sign up url"
+}
+
+# Users service variables
+variable "cognito_user_pool_id" {
+  type        = string
+  description = "The value of the cognito user pool id"
+}
+
+variable "cognito_user_client_id" {
+  type        = string
+  description = "The value of the cognito user client id"
+}
+
+variable "cognito_user_client_secret" {
+  type        = string
+  description = "The value of the cognito user client secret"
+}
+
+variable "cognito_token_endpoint" {
+  type        = string
+  description = "The value of the cognito token endpoint"
+}
+
+# Payments service variables
+variable "stripe_api_key" {
+  type        = string
+  description = "The value of the stripe api key"
+}
+
+variable "stripe_webhook_secret" {
+  type        = string
+  description = "The value of the stripe webhook secret"
+}
+
+variable "expire_time" {
+  type        = string
+  description = "The value of the expire time"
+}

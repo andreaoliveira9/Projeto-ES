@@ -54,6 +54,32 @@ resource "aws_ecs_task_definition" "payments_api_task_definition" {
           awslogs-stream-prefix = "ecs"
         }
       }
+      environment = [
+        {
+          name  = "MYSQL_URL"
+          value = var.payments_db_connection_string
+        },
+        {
+          name  = "RABBITMQ_URL"
+          value = var.mq_connection_string
+        },
+        {
+          name  = "DOMAIN"
+          value = var.domain
+        },
+        {
+          name  = "STRIPE_API_KEY"
+          value = var.stripe_api_key
+        },
+        {
+          name  = "STRIPE_WEBHOOK_SECRET"
+          value = var.stripe_webhook_secret
+        },
+        {
+          name  = "EXPIRE_TIME"
+          value = var.expire_time
+        }
+      ]
     }
   ])
 }
