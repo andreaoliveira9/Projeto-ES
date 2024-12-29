@@ -69,6 +69,6 @@ resource "aws_ecs_task_definition" "user_ui_task_definition" {
 }
 
 resource "aws_cloudwatch_log_group" "user_ui_log_group" {
-  name              = "/ecs/uachado-user-ui"
+  name              = "/ecs/clubsync-user-ui"
   retention_in_days = 7
 }
