@@ -6,7 +6,7 @@ output "user_ui_tg_arn" {
   value = aws_lb_target_group.ui_tg.arn
 }
 
-output "user_ui_url" {
+output "lb_url" {
   value = aws_lb.lb.dns_name
 }
 
