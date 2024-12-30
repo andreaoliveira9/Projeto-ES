@@ -4,7 +4,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type         = "EC2"
 
   min_size         = 1
-  desired_capacity = 3
+  desired_capacity = 1
   max_size         = 5
 
   launch_template {
