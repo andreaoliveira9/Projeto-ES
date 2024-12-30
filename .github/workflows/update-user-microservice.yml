@@ -1,4 +1,4 @@
-name: Inventory CD Pipeline
+name: Users CD Pipeline
 
 on:
   repository_dispatch:
