@@ -34,24 +34,6 @@ resource "aws_acm_certificate" "imported_cert" {
   }
 }
 
-resource "aws_lb_listener" "listener_https" {
-  load_balancer_arn = aws_lb.lb.arn
-  port              = 443
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
-
-  certificate_arn = aws_acm_certificate.imported_cert.arn
-
-  default_action {
-    type = "fixed-response"
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "Not Found."
-      status_code  = "404"
-    }
-  }
-}
-
 resource "aws_lb" "lb" {
   name               = "alb"
   internal           = false
