@@ -127,7 +127,7 @@ module "ecs" {
   emails_image_tag         = var.emails_image_tag
   
   # api env vars
-  domain = module.ec2.user_ui_url
+  domain = module.ec2.lb_url
   users_db_connection_string           = module.database.users_db_connection_string
   games_db_connection_string           = module.database.games_db_connection_string
   tickets_db_connection_string         = module.database.tickets_db_connection_string
