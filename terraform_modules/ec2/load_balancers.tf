@@ -60,35 +60,6 @@ resource "aws_lb" "lb" {
   subnets            = var.public_subnet_ids
 }
 
-resource "aws_lb_listener_rule" "ui_rule_https" {
-  listener_arn = aws_lb_listener.listener_https.arn
-  priority     = 300
-
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.ui_tg.arn
-  }
-
-  condition {
-    path_pattern {
-      values = ["/*"]
-    }
-  }
-}
-
-resource "aws_lb_target_group" "ui_tg" {
-  name        = "ui-target-group"
-  port        = 80
-  protocol    = "HTTP"
-  target_type = "ip"
-  vpc_id      = var.vpc_id
-
-  health_check {
-    path = "/"
-  }
-}
-
-
 resource "aws_lb_listener_rule" "games_rule_https" {
   listener_arn = aws_lb_listener.listener_https.arn
   priority     = 100
@@ -153,6 +124,22 @@ resource "aws_lb_listener_rule" "users_rule_https" {
   }
 }
 
+resource "aws_lb_listener_rule" "ui_rule_https" {
+  listener_arn = aws_lb_listener.listener_https.arn
+  priority     = 500
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.ui_tg.arn
+  }
+
+  condition {
+    path_pattern {
+      values = ["/*"]
+    }
+  }
+}
+
 resource "aws_lb_target_group" "games_tg" {
   name        = "games-target-group"
   port        = 8000
@@ -210,5 +197,17 @@ resource "aws_lb_target_group" "users_tg" {
     matcher  = "200"
     interval = 30
     timeout  = 5
+  }
+}
+
+resource "aws_lb_target_group" "ui_tg" {
+  name        = "ui-target-group"
+  port        = 80
+  protocol    = "HTTP"
+  target_type = "ip"
+  vpc_id      = var.vpc_id
+
+  health_check {
+    path = "/"
   }
 }
