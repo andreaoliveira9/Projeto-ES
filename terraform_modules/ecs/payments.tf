@@ -78,6 +78,14 @@ resource "aws_ecs_task_definition" "payments_api_task_definition" {
         {
           name  = "EXPIRE_TIME"
           value = var.expire_time
+        },
+        {
+          name  = "AWS_REGION"
+          value = var.aws_region
+        },
+        {
+          name  = "USER_POOL_ID"
+          value = var.cognito_user_pool_id
         }
       ]
     }
