@@ -28,7 +28,7 @@ resource "aws_ecs_task_definition" "emails_task_definition" {
 
   container_definitions = jsonencode([
     {
-      name      = "clubsync-emails-api"
+      name      = "clubsync-emails-service"
       image     = format("%s:%s", var.emails_image_repo, var.emails_image_tag)
       cpu       = 256
       memory    = 512
@@ -36,7 +36,7 @@ resource "aws_ecs_task_definition" "emails_task_definition" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "/ecs/clubsync-emails-api"
+          awslogs-group         = "/ecs/clubsync-emails-service"
           awslogs-region        = var.aws_region
           awslogs-stream-prefix = "ecs"
         }
@@ -68,6 +68,6 @@ resource "aws_ecs_task_definition" "emails_task_definition" {
 }
 
 resource "aws_cloudwatch_log_group" "emails_log_group" {
-  name              = "/ecs/clubsync-emails"
+  name              = "/ecs/clubsync-emails-service"
   retention_in_days = 7
 }
