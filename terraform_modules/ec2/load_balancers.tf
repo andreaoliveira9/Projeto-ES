@@ -60,19 +60,17 @@ resource "aws_lb" "lb" {
   subnets            = var.public_subnet_ids
 }
 
-resource "aws_lb_listener_rule" "ui_rule_https" {
-  listener_arn = aws_lb_listener.listener_https.arn
-  priority     = 500
+resource "aws_lb_listener" "listener_https" {
+  load_balancer_arn = aws_lb.lb.arn
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
 
-  action {
+  certificate_arn = aws_acm_certificate.imported_cert.arn
+
+  default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.ui_tg.arn
-  }
-
-  condition {
-    path_pattern {
-      values = ["/*"]
-    }
   }
 }
 
@@ -148,7 +146,7 @@ resource "aws_lb_target_group" "games_tg" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path     = "/games/v1"
+    path     = "/health"
     matcher  = "200"
     interval = 30
     timeout  = 5
@@ -193,7 +191,7 @@ resource "aws_lb_target_group" "users_tg" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path     = "/users/v1"
+    path     = "/health"
     matcher  = "200"
     interval = 30
     timeout  = 5
