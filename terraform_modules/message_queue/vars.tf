@@ -23,3 +23,7 @@ variable "mq_password" {
   type        = string
   description = "The password for the RabbitMQ broker"
 }
+
+variable "instances_sg_id" {
+  type = string
+}

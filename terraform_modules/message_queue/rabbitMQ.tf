@@ -21,10 +21,10 @@ resource "aws_security_group" "mq_sg" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port   = 5671
-    to_port     = 5672
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/24"]
+    from_port       = 5671
+    to_port         = 5671
+    protocol        = "tcp"
+    security_groups = [var.instances_sg_id]
   }
 
   egress {
