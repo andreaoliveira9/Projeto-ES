@@ -32,10 +32,6 @@ variable "user_ui_tg_arn" {
   type = string
 }
 
-variable "user_ui_url" {
-  type = string
-}
-
 variable "games_api_tg_arn" {
   type = string
 }

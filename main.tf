@@ -105,7 +105,7 @@ module "ecs" {
   ecs_task_execution_role_arn  = module.iam.ecs_task_execution_role_arn
   ecs_asg_arn                  = module.ec2.ecs_asg_arn
   user_ui_tg_arn               = module.ec2.user_ui_tg_arn
-  user_ui_url                  = module.ec2.user_ui_url
+  domain = module.ec2.lb_url
   games_api_tg_arn             = module.ec2.games_api_tg_arn
   tickets_api_tg_arn           = module.ec2.tickets_api_tg_arn
   payments_api_tg_arn          = module.ec2.payments_api_tg_arn
@@ -127,7 +127,6 @@ module "ecs" {
   emails_image_tag         = var.emails_image_tag
   
   # api env vars
-  domain = module.ec2.lb_url
   users_db_connection_string           = module.database.users_db_connection_string
   games_db_connection_string           = module.database.games_db_connection_string
   tickets_db_connection_string         = module.database.tickets_db_connection_string
