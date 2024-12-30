@@ -52,4 +52,7 @@ resource "aws_iam_policy_attachment" "ecs_instance_role_policy" {
 resource "aws_iam_instance_profile" "ecs_instance_profile" {
   name = "ecsInstanceProfile"
   role = aws_iam_role.ecs_instance_role.name
+  lifecycle {
+    ignore_changes = [name]
+  }
 }
