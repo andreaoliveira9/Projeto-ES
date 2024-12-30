@@ -128,7 +128,7 @@ resource "aws_lb_target_group" "games_tg" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path     = "/games/v1//health"
+    path     = "/games/v1/health"
     matcher  = "200"
     interval = 30
     timeout  = 5
@@ -143,7 +143,7 @@ resource "aws_lb_target_group" "payments_tg" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path     = "/payments/v1//health"
+    path     = "/payments/v1/health"
     matcher  = "200"
     interval = 30
     timeout  = 5
@@ -158,7 +158,7 @@ resource "aws_lb_target_group" "tickets_tg" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path     = "/tickets/v1//health"
+    path     = "/tickets/v1/health"
     matcher  = "200"
     interval = 30
     timeout  = 5
@@ -173,7 +173,7 @@ resource "aws_lb_target_group" "users_tg" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path     = "/users/v1//health"
+    path     = "/users/v1/health"
     matcher  = "200"
     interval = 30
     timeout  = 5

@@ -77,6 +77,8 @@ module "message_queue" {
 
   mq_user     = var.mq_user
   mq_password = var.mq_password
+
+  instances_sg_id   = module.ec2.instances_sg_id
 }
 
 module "ec2" {
