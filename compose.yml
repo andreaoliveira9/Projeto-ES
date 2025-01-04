@@ -1,0 +1,143 @@
+name: es
+services:
+  db_mysql:
+    image: mysql:8.0
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      # - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db_mysql:/docker-entrypoint-initdb.d
+    healthcheck:
+      test:
+        [
+         "CMD-SHELL", "mysqladmin ping -h localhost -uroot -p${MYSQL_ROOT_PASSWORD} && echo 'SELECT 1' | mysql -u root -p${MYSQL_ROOT_PASSWORD}"
+        ]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+      start_period: 60s
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: heidiks/rabbitmq-delayed-message-exchange:latest
+    env_file: .env
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    ports:
+      - 15672:15672
+      - 5672:5672
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "node_health_check"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - data_rabbitmq:/var/lib/rabbitmq
+
+  user_microservice:
+    build:
+      context: ./user_microservice
+      dockerfile: test.dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - MYSQL_URL=mysql+pymysql://${USER_MYSQL_USER}:${USER_MYSQL_PASSWORD}@db_mysql:3306/${USER_MYSQL_DATABASE}
+    volumes:
+      - ./user_microservice:/user_microservice
+    depends_on:
+      db_mysql:
+        condition: service_healthy
+
+  ticket_microservice:
+    build:
+      context: ./ticket_microservice
+      dockerfile: test.dockerfile
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    environment:
+      - MYSQL_URL=mysql+pymysql://${TICKET_MYSQL_USER}:${TICKET_MYSQL_PASSWORD}@db_mysql:3306/${TICKET_MYSQL_DATABASE}
+    volumes:
+      - ./ticket_microservice:/ticket_microservice
+    depends_on:
+      db_mysql:
+        condition: service_healthy
+
+  game_microservice:
+    build:
+      context: ./game_microservice
+      dockerfile: test.dockerfile
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env
+    environment:
+      - MYSQL_URL=mysql+pymysql://${GAME_MYSQL_USER}:${GAME_MYSQL_PASSWORD}@db_mysql:3306/${GAME_MYSQL_DATABASE}
+    volumes:
+      - ./game_microservice:/game_microservice
+    depends_on:
+      db_mysql:
+        condition: service_healthy
+
+  payment_microservice:
+    build:
+      context: ./payments_microservice
+      dockerfile: test.dockerfile
+    ports:
+      - "8003:8003"
+    env_file:
+      - .env
+    environment:
+      - MYSQL_URL=mysql+pymysql://${PAYMENT_MYSQL_USER}:${PAYMENT_MYSQL_PASSWORD}@db_mysql:3306/${PAYMENT_MYSQL_DATABASE}
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+    volumes:
+      - ./payment_microservice:/payment_microservice
+    depends_on:
+      db_mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+  
+  email_microservice:
+    build:
+      context: ./email_microservive
+      dockerfile: test.dockerfile
+    ports:
+      - "8004:8004"
+    env_file:
+      - .env
+    environment:
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+    volumes:
+      - ./email_microservive:/email_microservice
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+  
+  # web_ui:
+  #   build:
+  #     context: web_ui
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - web_ui_modules:/web_ui/node_modules
+  #     - ./web_ui:/web_ui
+  #   restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
+  data_rabbitmq:
+    driver: local
+  # web_ui_modules:
+  #   driver: local
