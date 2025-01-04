@@ -14,10 +14,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./db_mysql:/docker-entrypoint-initdb.d
     healthcheck:
-      test:
-        [
-         "CMD-SHELL", "mysqladmin ping -h localhost -uroot -p${MYSQL_ROOT_PASSWORD} && echo 'SELECT 1' | mysql -u root -p${MYSQL_ROOT_PASSWORD}"
-        ]
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -uroot -p${MYSQL_ROOT_PASSWORD} && echo 'SELECT 1' | mysql -u root -p${MYSQL_ROOT_PASSWORD}" ]
       interval: 10s
       timeout: 30s
       retries: 3
@@ -34,7 +31,7 @@ services:
       - 15672:15672
       - 5672:5672
     healthcheck:
-      test: ["CMD", "rabbitmqctl", "node_health_check"]
+      test: [ "CMD", "rabbitmqctl", "node_health_check" ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -67,10 +64,13 @@ services:
       - .env
     environment:
       - MYSQL_URL=mysql+pymysql://${TICKET_MYSQL_USER}:${TICKET_MYSQL_PASSWORD}@db_mysql:3306/${TICKET_MYSQL_DATABASE}
+      - RABBITMQ_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672
     volumes:
       - ./ticket_microservice:/ticket_microservice
     depends_on:
       db_mysql:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
 
   game_microservice:
@@ -107,7 +107,7 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
-  
+
   email_microservice:
     build:
       context: ./email_microservive
@@ -123,7 +123,6 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
-  
   # web_ui:
   #   build:
   #     context: web_ui
