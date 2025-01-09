@@ -258,3 +258,14 @@ variable "expire_time" {
   type        = string
   description = "The value of the expire time"
 }
+
+# Tickets service variables
+variable "aws_access_key_id_tickets" {
+  type        = string
+  description = "AWS Access Key ID Tickets"
+}
+
+variable "aws_secret_access_key_tickets" {
+  type        = string
+  description = "AWS Secret Access Tickets"
+}

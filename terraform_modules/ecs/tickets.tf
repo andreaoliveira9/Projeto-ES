@@ -59,6 +59,18 @@ resource "aws_ecs_task_definition" "tickets_api_task_definition" {
           name  = "MYSQL_URL"
           value = var.tickets_db_connection_string
         },
+        {
+          name  = "AWS_ACCESS_KEY_ID"
+          value = var.aws_access_key_id_tickets
+        },
+        {
+          name  = "AWS_SECRET_ACCESS_KEY"
+          value = var.aws_secret_access_key_tickets
+        },
+        {
+          name = "USER_POOL_ID"
+          value = var.cognito_user_pool_id
+        }
       ]
     }
   ])

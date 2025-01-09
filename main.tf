@@ -157,4 +157,8 @@ module "ecs" {
   stripe_api_key                 = var.stripe_api_key
   stripe_webhook_secret = var.stripe_webhook_secret
   expire_time = var.expire_time
+
+  # env var tickets
+  aws_access_key_id_tickets = var.aws_access_key_id_tickets
+  aws_secret_access_key_tickets = var.aws_secret_access_key_tickets
 }

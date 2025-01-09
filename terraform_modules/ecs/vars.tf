@@ -186,3 +186,11 @@ variable "domain" {
 variable "expire_time" {
   type = string
 }
+
+variable "aws_access_key_id_tickets" {
+  type = string
+}
+
+variable "aws_secret_access_key_tickets" {
+  type = string
+}
