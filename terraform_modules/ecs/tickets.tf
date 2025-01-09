@@ -70,7 +70,11 @@ resource "aws_ecs_task_definition" "tickets_api_task_definition" {
         {
           name = "USER_POOL_ID"
           value = var.cognito_user_pool_id
-        }
+        },
+        {
+          name  = "AWS_REGION"
+          value = var.aws_region
+        },
       ]
     }
   ])
