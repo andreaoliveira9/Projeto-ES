@@ -75,6 +75,10 @@ resource "aws_ecs_task_definition" "tickets_api_task_definition" {
           name  = "AWS_REGION"
           value = var.aws_region
         },
+        {
+          name  = "RABBITMQ_URL"
+          value = var.mq_connection_string
+        },
       ]
     }
   ])
