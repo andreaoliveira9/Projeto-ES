@@ -17,7 +17,7 @@ resource "aws_ecs_service" "user_ui_service" {
   load_balancer {
     target_group_arn = var.user_ui_tg_arn
     container_name   = "clubsync-user-ui"
-    container_port   = 80
+    container_port   = 8080
   }
 }
 
@@ -41,8 +41,8 @@ resource "aws_ecs_task_definition" "user_ui_task_definition" {
       essential = true
       portMappings = [
         {
-          containerPort = 80
-          hostPort      = 80
+          containerPort = 8080
+          hostPort      = 8080
           protocol      = "tcp"
         }
       ]

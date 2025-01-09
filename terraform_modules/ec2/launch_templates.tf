@@ -42,8 +42,8 @@ resource "aws_security_group" "instances" {
 
   # allow inbound traffic from the public subnet on port 80 (ui)
   ingress {
-    from_port       = 80
-    to_port         = 80
+    from_port       = 8080
+    to_port         = 8080
     protocol        = "tcp"
     security_groups = [aws_security_group.lb.id]
   }

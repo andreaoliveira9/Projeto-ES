@@ -182,7 +182,7 @@ resource "aws_lb_target_group" "users_tg" {
 
 resource "aws_lb_target_group" "ui_tg" {
   name        = "ui-target-group"
-  port        = 80
+  port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id
