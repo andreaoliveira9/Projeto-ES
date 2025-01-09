@@ -79,6 +79,10 @@ resource "aws_ecs_task_definition" "tickets_api_task_definition" {
           name  = "RABBITMQ_URL"
           value = var.mq_connection_string
         },
+        {
+          name  = "STRIPE_API_KEY"
+          value = var.stripe_api_key
+        },
       ]
     }
   ])
