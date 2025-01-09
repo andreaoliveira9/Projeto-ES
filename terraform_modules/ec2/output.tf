@@ -7,7 +7,7 @@ output "user_ui_tg_arn" {
 }
 
 output "lb_url" {
-  value = aws_lb.lb.dns_name
+  value = "https://${aws_lb.lb.dns_name}"
 }
 
 output "games_api_tg_arn" {
